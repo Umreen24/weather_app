@@ -9,7 +9,7 @@ body {
 }
 
 .app {
-  background-color: #151923;
+  background-color: #233140;
   height: 100vh;
 }
 
@@ -51,8 +51,9 @@ main {
 .date {
   margin: 0px 0px 15px;
   color: white;
+  font-family: system-ui;
   font-weight: 100;
-  text-align: right;
+  text-align: left;
 }
 
 .location-box .location {
@@ -69,36 +70,77 @@ main {
 
 .weather-box {
   width: 374px;
-  height: 98px;
+  height: 200px;
   border-radius: 18px;
-  background-image: url("./images/city_night.jpg");
-  background-position: center;
-  opacity: 59%;
+  border: 1px solid #f5eaee;
+  background-image: url("./images/cool_sunny.jpg");
+  background-position: 2% 50%;
+  transition: .4s ease-out;
+  opacity: 90%;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  color: white;
+  color: #fffeff;
   font-size: 22px;
   font-weight: 500;
 
   padding: 10px;
 }
 
+.weather-box-warm {
+  width: 374px;
+  height: 200px;
+  border-radius: 18px;
+  border: 1px solid #f5eaee;
+  background-image: url("./images/mountain_graphic.jpg");
+  background-position: 10% 90%;
+  transition: .4s ease-out;
+  opacity: 90%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #fffeff;
+  font-size: 22px;
+  font-weight: 500;
+
+  padding: 10px;
+}
+
+.default-weather {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0px;
+  margin-bottom: -30px;
+  height: 10px; 
+  
+  font-size: 28px;
+  font-weight: 400;
+}
+
 .weather-box #default-country {
   font-size: 18px;
   font-weight: 200;
+  color: #fffeff;
 }
 
 #default-temp {
   display: flex;
+  flex-direction: column;
   text-align: right;
   justify-content: flex-end;
 
-  font-size: 60px;
+  font-size: 40px;
+  font-weight: 200;
   width: 100%;
+  margin-bottom: -10px;
 }
 
-#default-temp span {
-  margin-bottom: -30px;
+.forecast-box .forecast {
+  color: #ffff;
+  font-size: 20px;
+  font-weight: 100;
+  text-align: left;
+  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
 }
