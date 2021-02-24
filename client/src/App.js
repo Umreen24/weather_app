@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const api = {
   key: process.env.REACT_APP_API_KEY,
@@ -6,19 +7,25 @@ const api = {
 };
 
 function App() {
-  
-  const [query, setQuery] = useState('');
-  const [weather, setWeather] = useState('');
-  
-  const search = (event) => {
-    if (event.key === 'Enter') {
-      fetch(`${api.base}weather?q=${query}&units=imperial&APPID=${api.key}`)
-        .then(res => res.json())
-        .then(result => {
-          setWeather(result)
-          setQuery('')
-          console.log(result)
-        });
+  const [query, setQuery] = useState("");
+  const [weather, setWeather] = useState("");
+  const [lat, setLat] = useState("");
+  const [lon, setLon] = useState("");
+  const [forecast, setForecast] = useState("");
+
+  const weatherURL = `${api.base}weather?q=${query}&units=imperial&APPID=${api.key}`;
+  const forecastURL = `${api.base}onecall?lat=${lat}&lon=${lon}&units=imperial&APPID=${api.key}`;
+
+  const search = async (event) => {
+    if (event.key === "Enter") {
+      try {
+        let res = await axios.get(weatherURL);
+        setWeather(res.data);
+        setLat(res.data.coord.lat);
+        setLon(res.data.coord.lon);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -52,24 +59,25 @@ function App() {
     let month = months[d.getMonth()];
     let year = d.getFullYear();
 
-    return `${month} ${date}, ${year}`;
+    return `${day} ${month} ${date}, ${year}`;
   };
-  
-  // Going to try to create conditional styling based on time to show different 
+
+  // Going to try to create conditional styling based on time to show different
   // backgrounds on default location box
   //const time = new Date().toLocaleTimeString();
-  
+
   return (
     <div className="app">
       <main>
         <div className="search-box">
-          <input 
-            type="text" 
-            className="search-bar" 
-            placeholder="Search" 
-            onChange={e => setQuery(e.target.value)} 
-            value={query} 
-            onKeyPress={search} />
+          <input
+            type="text"
+            className="search-bar"
+            placeholder="Search"
+            onChange={(e) => setQuery(e.target.value)}
+            value={query}
+            onKeyPress={search}
+          />
         </div>
         <div className="date">Today: {dateBuilder(new Date())}</div>
         <br />
@@ -79,12 +87,16 @@ function App() {
           <hr className="location-line" />
           <br />
           <div className="weather-box-container">
-          {(typeof weather.main != 'undefined') ? (
-              <div className={
-                  (typeof weather.main != "undefined") 
-                  ? ((weather.main.temp > 60) 
-                  ? "weather-box-warm" : "weather-box") : "weather-box"}
-                >
+            {typeof weather.main != "undefined" ? (
+              <div
+                className={
+                  typeof weather.main != "undefined"
+                    ? weather.main.temp > 60
+                      ? "weather-box-warm"
+                      : "weather-box"
+                    : "weather-box"
+                }
+              >
                 <div id="default-temp">
                   <span>{Math.round(weather.main.temp)}°F</span>
                 </div>
@@ -93,17 +105,19 @@ function App() {
                 </div>
                 <span id="default-city">{weather.name}</span>
                 <span id="default-country">{weather.sys.country}</span>
-            </div>
-            ) : ('')}
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
+        <br />
         <br />
         <div>
           <div className="forecast-box">
             <div className="forecast">Forecast</div>
-            <hr className="forecast-line"/>
+            <hr className="forecast-line" />
           </div>
-          
         </div>
       </main>
     </div>
