@@ -23,6 +23,19 @@ function App() {
         setWeather(res.data);
         setLat(res.data.coord.lat);
         setLon(res.data.coord.lon);
+        getForecast();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const getForecast = async () => {
+    if (lat && lon) {
+      try {
+        let forecastRes = await axios.get(forecastURL);
+        setForecast(forecastRes.data);
+        //console.log(forecastRes.data);
       } catch (error) {
         console.log(error);
       }
