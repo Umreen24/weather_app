@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const api = {
@@ -35,7 +35,7 @@ function App() {
       try {
         let forecastRes = await axios.get(forecastURL);
         setForecast(forecastRes.data);
-        //console.log(forecastRes.data);
+        console.log(forecastRes.data);
       } catch (error) {
         console.log(error);
       }
@@ -128,8 +128,20 @@ function App() {
         <br />
         <div>
           <div className="forecast-box">
-            <div className="forecast">Forecast</div>
+            <div className="forecast">3-Day Forecast</div>
             <hr className="forecast-line" />
+            <br />
+            <div className="forecast-box-container">
+              {typeof forecast.daily != "undefined" ? (
+                <div className="forecast-circle-container">
+                  <div className="forecast-circle"></div>
+                  <div className="forecast-circle"></div>
+                  <div className="forecast-circle"></div>
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
         </div>
       </main>

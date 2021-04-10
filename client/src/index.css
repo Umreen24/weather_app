@@ -66,6 +66,9 @@ main {
 
 .weather-box-container {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
 }
 
 .weather-box {
@@ -75,7 +78,7 @@ main {
   border: 1px solid #f5eaee;
   background-image: url("./images/cool_sunny.jpg");
   background-position: 2% 50%;
-  transition: .4s ease-out;
+  transition: 0.4s ease-out;
   opacity: 90%;
 
   display: flex;
@@ -95,7 +98,7 @@ main {
   border: 1px solid #f5eaee;
   background-image: url("./images/mountain_graphic.jpg");
   background-position: 10% 90%;
-  transition: .4s ease-out;
+  transition: 0.4s ease-out;
   opacity: 90%;
 
   display: flex;
@@ -113,8 +116,8 @@ main {
   justify-content: flex-end;
   margin-top: 0px;
   margin-bottom: -30px;
-  height: 10px; 
-  
+  height: 10px;
+
   font-size: 28px;
   font-weight: 400;
 }
@@ -143,4 +146,18 @@ main {
   font-weight: 100;
   text-align: left;
   text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
+}
+
+.forecast-circle-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 250px;
+}
+
+.forecast-circle {
+  border-radius: 100%;
+  border: 2px solid #ffff;
+  height: 120px;
+  width: 120px;
 }
