@@ -146,13 +146,21 @@ main {
   font-weight: 100;
   text-align: left;
   text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.get-forecast {
+  width: 50px;
+  height: 50px;
 }
 
 .forecast-circle-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
-  height: 250px;
+  height: 200px;
 }
 
 .forecast-circle {

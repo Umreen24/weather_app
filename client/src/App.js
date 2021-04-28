@@ -14,7 +14,7 @@ function App() {
   const [forecast, setForecast] = useState("");
 
   const weatherURL = `${api.base}weather?q=${query}&units=imperial&APPID=${api.key}`;
-  const forecastURL = `${api.base}onecall?lat=${lat}&lon=${lon}&units=imperial&APPID=${api.key}`;
+  const forecastURL = `${api.base}onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=imperial&APPID=${api.key}`;
 
   const search = async (event) => {
     if (event.key === "Enter") {
@@ -128,13 +128,15 @@ function App() {
         <br />
         <div>
           <div className="forecast-box">
-            <div className="forecast">3-Day Forecast</div>
-            <hr className="forecast-line" />
-            <br />
+            <div className="forecast">
+              2-Day Forecast
+              <button onClick={getForecast()} className="get-forecast">
+                Get
+              </button>
+            </div>
             <div className="forecast-box-container">
               {typeof forecast.daily != "undefined" ? (
                 <div className="forecast-circle-container">
-                  <div className="forecast-circle"></div>
                   <div className="forecast-circle"></div>
                   <div className="forecast-circle"></div>
                 </div>
